@@ -1,9 +1,38 @@
 The main idea of linear regression is to predict some value from input (\textit{x\textsubscript{i}}) using a function that has a linear behaviour. The \textbf{goal} is to find the most accurate coefficients for the linear function we must reduce the error as much as possible, in other words, we gotta minimize the cost function.
 
 \subsection{Cost Function}
-In order to know the accuracy of the hypothesis
+We can measure the accuracy of our hypothesis function by using a cost function. This takes an average difference (actually a fancier version of an average) of all the results of the hypothesis with inputs from x's and the actual output y's.
+
+$$J(\theta) = \frac{1}{2m}\sum_{i=1}^{m} (h_{\theta}(x^{(i)}) - y^{(i)})^2$$
+
+\subsection{How to obtain $\theta_{j}$}
+The idea is to minimize the \textbf{Cost Dunction} (minimize the error). In order to do that, we need to build an equation by comparing the derivative of J to cero.
+
+$$min(J_{(\theta)}) = \frac{\partial{J_{\theta}}}{\partial{\theta_{j}}} = \frac{1}{m}\sum_{i=1}^{m} (h_{\theta}(x^{(i)}) - y^{(i)})x_{j}^{(i)} = 0$$
+
+We got 2 ways to approach this problem:
+
+1. \textit{Gradient Descent}: It is an iterative algorithm that, with a fixed learning rate ($\alpha$), updates all values of $\theta$ simultaneously and decreases the Cost Function.
+
+The learning rate ($\alpha$) is adjusted by try/error. The initial values to test should be on a log-scale, at multiplicative
+steps of about 3 times the previous value (i.e., 0.3, 0.1, 0.03, 0.01 and so on).
+\par
+\begin{center}
+repeat until converge \{
+	$$\theta_{j} = \theta_{j} - \alpha \frac{\partial{J_{\theta}}}{\partial{\theta_{j}}}$$
+\}
+\end{center}
+
+2. \textit{Normal Equation}: 
+
+
 
 \subsection{Univariable}
+When we have only 1 feature. The linear function for univariable regression should look like this:
 
+$$h_{\theta}(x) = \theta_{0} + \theta_{1}x$$
 
-\subsubsection{Multivariable}
+\subsection{Multivariable}
+When we have more than 1 feature. The multivariable linear regression function should look like this:
+
+$$h_{\theta}(x) = \theta_{0}x_{0} + \theta_{1}x_{1} + \theta_{2}x_{2} + ... + \theta_{n}x_{n}$$
