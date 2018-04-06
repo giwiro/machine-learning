@@ -119,6 +119,41 @@ repeat until converge \{
 \}
 \end{center}
 
+Since it's an iterative algorithm we want the steps to be really small in order to make the computation time a lot faster. We care about the relationship between entries, not the actual values; that why we tend to make the mean zero. For that we got 2 methods:
+
+1. \textit{Feature Scaling}: Involves dividing the input values by the range (i.e. the maximum value minus the minimum value) of the input variable, resulting in a new range of just 1.
+
+2. \textit{Mean normalization}: Involves subtracting the average value for an input variable from the values for that input variable resulting in a new average value for the input variable of just zero.
+
+$$x_i = \frac{x_i - \mu_i}{s_i}$$
+
+Where $\mu_i$ is the average of all the values for feature $(i)$ and $s_i$ is the range of values (max - min), or $s_i$ is the standard deviation.
+
+Note that dividing by the range, or dividing by the standard deviation, give different results. 
+
 \subsubsection{Normal Equation}
-This is the analytical way to tackle this problem. We actually solve the equation $\frac{\partial{J(\theta)}}{\partial{\theta_{j}}} = 0$
+This is the analytical way to tackle this problem. We actually solve the equation $\frac{\partial{J(\theta)}}{\partial{\theta_{j}}} = 0$. There is no need to do feature scaling with the normal equation.
+
+$$\theta = (X^TX)^{-1}X^Ty$$
+
+
+The main differences between this two approaches:
+
+
+
+\begin{center}
+\begin{tabular}{ |c|c| } 
+\hline
+Gradient Descent & Normal Equation \\
+\hline
+Need to choose alpha & No need to choose alpha \\
+\hline
+Needs many iterations & No need to iterate \\
+\hline
+$O(kn^2)$ & $O(n^3)$, need to calculate inverse of $X^TX$ \\
+\hline
+Works well when $n$ is large & Slow if $n$ is very large \\
+\hline
+\end{tabular}
+\end{center}
 
