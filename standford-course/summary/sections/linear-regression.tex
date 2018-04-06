@@ -1,38 +1,124 @@
 The main idea of linear regression is to predict some value from input (\textit{x\textsubscript{i}}) using a function that has a linear behaviour. The \textbf{goal} is to find the most accurate coefficients for the linear function we must reduce the error as much as possible, in other words, we gotta minimize the cost function.
 
+\subsection{Types}
+\subsubsection{Univariable}
+When we have only 1 feature. The linear function for univariable regression should look like this:
+
+\begin{align}
+	h_{\theta}(x) & = \theta_{0} + \theta_{1}x
+\end{align}
+
+\subsubsection{Multivariable}
+When we have more than 1 feature. The multivariable linear regression function should look like this:
+
+\begin{align}
+	h_{\theta}(x) & = \theta_{0}x_{0} + \theta_{1}x_{1} + \theta_{2}x_{2} + ... + \theta_{n}x_{n}
+\end{align}
+
 \subsection{Cost Function}
 We can measure the accuracy of our hypothesis function by using a cost function. This takes an average difference (actually a fancier version of an average) of all the results of the hypothesis with inputs from x's and the actual output y's.
 
 $$J(\theta) = \frac{1}{2m}\sum_{i=1}^{m} (h_{\theta}(x^{(i)}) - y^{(i)})^2$$
 
+\subsection{Notation (Matrixes and Vector approaches)}
+In order to make operations more code/cpu "friendly" we represent our set of data and variables on matrixes and vectors.
+
+\begin{align*}
+	x_j^{(i)} & = \text{value of feature } j \text{in the } i^{th} \text{ training example} \\
+	x^{(i)} & = \text{the input (features) of the } i^{th} \text{ training example} \\
+	m & = \text{The number of training examples} \\
+	n & = \text{The number of features}
+\end{align*}
+
+\begin{align*}
+    \theta_{(n \times 1)} & = \begin{bmatrix}
+			\theta_0 \\
+			\theta_1 \\
+			\theta_2 \\
+			\vdots \\
+			\theta_{n} 
+		\end{bmatrix}
+	&
+	x_{(n \times 1)} & = \begin{bmatrix}
+			x_0 \\
+			x_1 \\
+			x_2 \\
+			\vdots \\
+			x_n 
+		\end{bmatrix}
+	&
+	X_{(m \times n)} & = \renewcommand\arraystretch{1.2}\begin{bmatrix}
+			x_0^1 & x_1^1 & x_2^1 \hdots x_n^1 \\
+			x_0^2 & x_1^2 & x_2^2 \hdots x_n^2 \\
+			x_0^3 & x_1^3 & x_2^3 \hdots x_n^3 \\
+			\vdots & \vdots & \vdots \\
+			x_0^m & x_1^m & x_2^m \hdots x_n^m \\
+		\end{bmatrix}
+	&
+	y_{(m \times 1)} & = \begin{bmatrix}
+			y_0 \\
+			y_1 \\
+			y_2 \\
+			\vdots \\
+			y_m
+		\end{bmatrix}
+\end{align*}
+
+\begin{align*}
+	\text{definition format: } h_{(\theta)} & = 
+	\begin{bmatrix} \theta_0 & \theta_1 \hdots \theta_n \end{bmatrix}
+	\begin{bmatrix} 
+		x_0 \\
+		x_1 \\
+		\vdots \\
+		x_n
+	\end{bmatrix} = \theta^Tx
+\end{align*}
+
+\begin{align}
+	\text{solution format: } h_{(\theta)} & = 
+	\renewcommand\arraystretch{1.2}\begin{bmatrix}
+			x_0^1 & x_1^1 & x_2^1 \hdots x_n^1 \\
+			x_0^2 & x_1^2 & x_2^2 \hdots x_n^2 \\
+			x_0^3 & x_1^3 & x_2^3 \hdots x_n^3 \\
+			\vdots & \vdots & \vdots \\
+			x_0^m & x_1^m & x_2^m \hdots x_n^m \\
+		\end{bmatrix}
+	\begin{bmatrix} \theta_0 & \theta_1 \hdots \theta_n \end{bmatrix} = X\theta
+\end{align}
+
+\begin{align}
+	\text{cost function: } J(\theta) & = \frac{1}{2m}(X\theta - y)^2
+\end{align}
+
+\justify
+\textbf{Note 1}: $x_0$ is a \textit{"hack"} and it's value is always 1. It's for making both ($\theta$ and $x$) same size in order to multiply them.
+\justify
+\textbf{Note 2}: The univariable and multivariable $h_{(\theta)}$ can be solved using $X\theta$
+
+
 \subsection{How to obtain $\theta_{j}$}
 The idea is to minimize the \textbf{Cost Dunction} (minimize the error). In order to do that, we need to build an equation by comparing the derivative of J to cero.
 
-$$min(J_{(\theta)}) = \frac{\partial{J_{\theta}}}{\partial{\theta_{j}}} = \frac{1}{m}\sum_{i=1}^{m} (h_{\theta}(x^{(i)}) - y^{(i)})x_{j}^{(i)} = 0$$
+$$min(J(\theta)) = \frac{\partial{J(\theta)}}{\partial{\theta_{j}}} = \frac{1}{m}\sum_{i=1}^{m} (h_{\theta}(x^{(i)}) - y^{(i)})x_{j}^{(i)} = 0$$
 
 We got 2 ways to approach this problem:
 
-1. \textit{Gradient Descent}: It is an iterative algorithm that, with a fixed learning rate ($\alpha$), updates all values of $\theta$ simultaneously and decreases the Cost Function.
+1. \textit{Gradient Descent}
 
+2. \textit{Normal Equation}
+
+\subsubsection{Gradient Descent}
+It is an iterative algorithm that, with a fixed learning rate ($\alpha$), updates all values of $\theta$ simultaneously and decreases the Cost Function.
 The learning rate ($\alpha$) is adjusted by try/error. The initial values to test should be on a log-scale, at multiplicative
 steps of about 3 times the previous value (i.e., 0.3, 0.1, 0.03, 0.01 and so on).
 \par
 \begin{center}
 repeat until converge \{
-	$$\theta_{j} = \theta_{j} - \alpha \frac{\partial{J_{\theta}}}{\partial{\theta_{j}}}$$
+	$$\theta_{j} = \theta_{j} - \alpha \frac{\partial{J(\theta)}}{\partial{\theta_j}}$$
 \}
 \end{center}
 
-2. \textit{Normal Equation}: 
+\subsubsection{Normal Equation}
+This is the analytical way to tackle this problem. We actually solve the equation $\frac{\partial{J(\theta)}}{\partial{\theta_{j}}} = 0$
 
-
-
-\subsection{Univariable}
-When we have only 1 feature. The linear function for univariable regression should look like this:
-
-$$h_{\theta}(x) = \theta_{0} + \theta_{1}x$$
-
-\subsection{Multivariable}
-When we have more than 1 feature. The multivariable linear regression function should look like this:
-
-$$h_{\theta}(x) = \theta_{0}x_{0} + \theta_{1}x_{1} + \theta_{2}x_{2} + ... + \theta_{n}x_{n}$$
