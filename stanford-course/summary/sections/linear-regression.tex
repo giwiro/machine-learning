@@ -16,7 +16,7 @@ When we have more than 1 feature. The multivariable linear regression function s
 \end{align}
 
 \subsection{Cost Function}
-We can measure the accuracy of our hypothesis function by using a cost function. This takes an average difference (actually a fancier version of an average) of all the results of the hypothesis with inputs from x's and the actual output y's.
+We can measure the accuracy of our hypotheses function by using a cost function. This takes an average difference (actually a fancier version of an average) of all the results of the hypotheses with inputs from x's and the actual output y's.
 
 $$J(\theta) = \frac{1}{2m}\sum_{i=1}^{m} (h_{\theta}(x^{(i)}) - y^{(i)})^2$$
 
@@ -103,10 +103,10 @@ The idea is to minimize the \textbf{Cost Dunction} (minimize the error). In orde
 $$min(J(\theta)) = \frac{\partial{J(\theta)}}{\partial{\theta_{j}}} = \frac{1}{m}\sum_{i=1}^{m} (h_{\theta}(x^{(i)}) - y^{(i)})x_{j}^{(i)} = 0$$
 We got 2 ways to approach this problem:
 
-
-1. \textit{Gradient Descent}
-
-2. \textit{Normal Equation}
+\begin{enumerate}[label=\arabic*.]
+\item \textit{Gradient Descent}
+\item \textit{Normal Equation}
+\end{enumerate}
 
 \subsubsection{Gradient Descent}
 It is an iterative algorithm that, with a fixed learning rate ($\alpha$), updates all values of $\theta$ simultaneously and decreases the Cost Function.
@@ -121,15 +121,19 @@ repeat until converge \{
 
 Since it's an iterative algorithm we want the steps to be really small in order to make the computation time a lot faster. We care about the relationship between entries, not the actual values; that why we tend to make the mean zero. For that we got 2 methods:
 
-1. \textit{Feature Scaling}: Involves dividing the input values by the range (i.e. the maximum value minus the minimum value) of the input variable, resulting in a new range of just 1.
+\begin{enumerate}[label=\arabic*.]
+\item 
+	\textit{Feature Scaling}: Involves dividing the input values by the range (i.e. the maximum value minus the minimum value) of the input variable, resulting in a new range of just 1.
 
-2. \textit{Mean normalization}: Involves subtracting the average value for an input variable from the values for that input variable resulting in a new average value for the input variable of just zero.
+\item 
+	\textit{Mean normalization}: Involves subtracting the average value for an input variable from the values for that input variable resulting in a new average value for the input variable of just zero.
 
-$$x_i = \frac{x_i - \mu_i}{s_i}$$
+	$$x_i = \frac{x_i - \mu_i}{s_i}$$
 
-Where $\mu_i$ is the average of all the values for feature $(i)$ and $s_i$ is the range of values (max - min), or $s_i$ is the standard deviation.
+	Where $\mu_i$ is the average of all the values for feature $(i)$ and $s_i$ is the range of values (max - min), or $s_i$ is the standard deviation.
 
-Note that dividing by the range, or dividing by the standard deviation, give different results. 
+	Note that dividing by the range, or dividing by the standard deviation, give different results. 
+\end{enumerate}
 
 \subsubsection{Normal Equation}
 This is the analytical way to tackle this problem. We actually solve the equation $\frac{\partial{J(\theta)}}{\partial{\theta_{j}}} = 0$. There is no need to do feature scaling with the normal equation.
