@@ -26,11 +26,61 @@ $$0 \le h_{\theta}(x) \le 1$$
 In order to achieve this, we use the sigmoid function to map our output to 0 - 1 interval on the decision boundary. The function has this form:
 
 \begin{align}
-	h_{\theta}(x) & = g(\theta^Tx) \\
-	h_{\theta}(x) & = \frac{1}{1 + e^{-\theta^Tx}}
+	h_{\theta}(x) & = g(\theta^Tx)
 \end{align}
+
+$$h_{\theta}(x) = \frac{1}{1 + e^{-\theta^Tx}}$$
 
 The result of this function can be interpreted as \textit{the probability that the output is 1}. For example, $h_{\theta}(x)=0.7$ gives us a probability of 70\% that our output is 1. Our probability that our prediction is 0 is just the complement of our probability that it is 1 (e.g. if probability that it is 1 is 70\%, then the probability that it is 0 is 30\%).
 
 
 \subsubsection{Decision boundary}
+This function describes the line (can be polynomial) that determines the limit of the features in order to predict wether 0 or 1. The representation for the decision boundary is:
+
+$$\theta^Tx$$
+
+
+In order to visualize it, we need to separate the ones that are $y = 0$ and the ones that are $y = 1$, then plot all features. But all axis must be the features ($x^{(j)}$) displayed separately the \textit{0's} from the \textit{1's}
+
+
+And it can have many forms, also polynomial.
+
+
+\begin{figure}[h]
+	\begin{multicols}{2}
+	\centering
+	\includegraphics[width=0.5\textwidth]{decision-boundary}
+	\caption{Linear Decision boundary}
+	\label{fig:decision-boundary}
+
+	\centering
+	\includegraphics[width=0.5\textwidth]{decision-boundary-2}
+	\caption{Cuadratic Decision boundary}
+	\label{fig:decision-boundary}
+	\end{multicols}
+\end{figure}
+
+
+
+We can interpret the output of the hypotheses function as:
+
+\begin{align*}
+	h_{\theta}(x) \ge 0.5 \to  y = 1 \\
+	h_{\theta}(x) < 0.5 \to  y = 0
+\end{align*}
+
+If we observe Figure \ref{fig:sigmoid} we can observe that in order to get $g(z) \ge 0.5$ we need $z$ to be greater than $0$, in other words:
+
+\begin{align*}
+	& h_{\theta}(x) = g(\theta^Tx) \ge 0.5 \to  y = 1 \\
+	& \text{when }  \theta^Tx \ge 0
+\end{align*}
+
+Remember:
+
+\begin{align*}
+	& z = 0, e^0 = 1 \Rightarrow g(z) = 1/2 \\
+	& z \to \infty, e^{\infty} \to 0 \Rightarrow g(z) = 1 \\
+	& z \to -\infty, e^{-\infty} \to 0 \Rightarrow g(z) = 0 \\
+\end{align*}
+
