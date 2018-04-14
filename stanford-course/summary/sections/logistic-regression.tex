@@ -2,7 +2,7 @@ The main idea of logistic regression is to predict from a set of discrete binary
 
 So in conclusion, there is a \textbf{hypotheses} ($h_{\theta}(x)$) function that is the sigmoid ($g(x)$) function applied to the Decision boundary; and the \textbf{goal} is to find the most accurate parameters for the Decision boundary ($\theta^Tx$).
 
-\subsection{Components}
+\subsection{Concepts}
 \subsubsection{Sigmoid function}
 Also called \textit{Logistic function}, maps any real number to the (0, 1) interval, making it useful for transforming an arbitrary-valued function into a function better suited for classification. The function has this form:
 
@@ -26,7 +26,7 @@ $$0 \le h_{\theta}(x) \le 1$$
 In order to achieve this, we use the sigmoid function to map our output to 0 - 1 interval on the decision boundary. The function has this form:
 
 \begin{align}
-	h_{\theta}(x) & = g(\theta^Tx)
+	h_{\theta}(x) & = g(\theta^Tx) = g(X\theta)
 \end{align}
 
 $$h_{\theta}(x) = \frac{1}{1 + e^{-\theta^Tx}}$$
@@ -49,14 +49,14 @@ And it can have many forms, also polynomial.
 \begin{figure}[h]
 	\begin{multicols}{2}
 	\centering
-	\includegraphics[width=0.5\textwidth]{decision-boundary}
+	\includegraphics[width=0.4\textwidth]{decision-boundary}
 	\caption{Linear Decision boundary}
 	\label{fig:decision-boundary}
 
 	\centering
-	\includegraphics[width=0.5\textwidth]{decision-boundary-2}
+	\includegraphics[width=0.4\textwidth]{decision-boundary-2}
 	\caption{Cuadratic Decision boundary}
-	\label{fig:decision-boundary}
+	\label{fig:decision-boundary-2}
 	\end{multicols}
 \end{figure}
 
@@ -73,7 +73,7 @@ If we observe Figure \ref{fig:sigmoid} we can observe that in order to get $g(z)
 
 \begin{align*}
 	& h_{\theta}(x) = g(\theta^Tx) \ge 0.5 \to  y = 1 \\
-	& \text{when }  \theta^Tx \ge 0
+	& \text{when } z = \theta^Tx \ge 0
 \end{align*}
 
 Remember:
@@ -83,4 +83,34 @@ Remember:
 	& z \to \infty, e^{\infty} \to 0 \Rightarrow g(z) = 1 \\
 	& z \to -\infty, e^{-\infty} \to 0 \Rightarrow g(z) = 0 \\
 \end{align*}
+
+\subsection{Cost Function}
+We cannot use the same cost function that we use for linear regression because the Logistic Function will cause the output to be wavy, causing many local optima. In other words, it will not be a convex function.
+
+\begin{align*}
+	& J(\theta) = \frac{1}{m} \sum_{i=1}^{m}Cost(h_{\theta}(x^{(i)}), y^{(i)}) \\
+	& Cost(h_{\theta}(x), y) = -log(h_{\theta}(x)) \qquad\qquad\qquad \text{if } y = 1 \\
+	& Cost(h_{\theta}(x), y) = -log(1 - h_{\theta}(x)) \qquad\qquad \text{if } y = 0 \\
+\end{align*}
+
+The interpretation for this
+\begin{figure}[h]
+	\begin{multicols}{2}
+	\centering
+	\includegraphics[width=0.4\textwidth]{logistic-regression-cost}
+	\caption{$-log(h_{\theta}(x))$}
+	\label{fig:logistic-regression-cost}
+
+	\centering
+	\includegraphics[width=0.4\textwidth]{logistic-regression-cost-2}
+	\caption{$-log(1 - h_{\theta}(x))$}
+	\label{fig:logistic-regression-cost-2}
+	\end{multicols}
+\end{figure}
+
+But there is a much simpler and compat way to represent that conditional:
+
+\begin{align}
+	J(\theta) = \frac{1}{m} \sum_{i=1}^{m} -y^{(i)}log(h_{\theta}(x^{(i)})) - (1-y^{(i)})log(1 - h_{\theta}(x^{(i)}))
+\end{align}
 
