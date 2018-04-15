@@ -98,14 +98,14 @@ In order to make operations more code/cpu "friendly" we represent our set of dat
 
 
 \subsection{How to obtain $\theta_{j}$}
-The idea is to minimize the \textbf{Cost Dunction} (minimize the error). In order to do that, we need to build an equation by comparing the derivative of J to cero.
+The idea is to minimize the \textbf{Cost Function} (minimize the error). In order to do that, we need to build an equation by comparing the derivative of J (gradient) to cero.
 
 $$min(J(\theta)) = \frac{\partial{J(\theta)}}{\partial{\theta_{j}}} = \frac{1}{m}\sum_{i=1}^{m} (h_{\theta}(x^{(i)}) - y^{(i)})x_{j}^{(i)} = 0$$
 We got 2 ways to approach this problem:
 
 \begin{enumerate}[label=\arabic*.]
-\item \textit{Gradient Descent}
-\item \textit{Normal Equation}
+	\item \textit{Gradient Descent}
+	\item \textit{Normal Equation}
 \end{enumerate}
 
 \subsubsection{Gradient Descent}
@@ -113,11 +113,11 @@ It is an iterative algorithm that, with a fixed learning rate ($\alpha$), update
 The learning rate ($\alpha$) is adjusted by try/error. The initial values to test should be on a log-scale, at multiplicative
 steps of about 3 times the previous value (i.e., 0.3, 0.1, 0.03, 0.01 and so on).
 \par
-\begin{center}
-repeat until converge \{
-	$$\theta_{j} = \theta_{j} - \alpha \frac{\partial{J(\theta)}}{\partial{\theta_j}}$$
-\}
-\end{center}
+\begin{flalign*}
+	& \text{Repeat} \lbrace  \\
+	& \qquad \theta_j := \theta_j - \alpha\frac{\partial{J(\theta)}}{\partial{\theta_j}}  \\
+	& \rbrace  
+\end{flalign*}
 
 Since it's an iterative algorithm we want the steps to be really small in order to make the computation time a lot faster. We care about the relationship between entries, not the actual values; that why we tend to make the mean zero. For that we got 2 methods:
 
