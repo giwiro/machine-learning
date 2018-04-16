@@ -49,7 +49,24 @@ X = [ones(m, 1) X];
 %                 initial_theta, options);
 %
 
+options = optimset('GradObj', 'on', 'MaxIter', 50);
 
+% The main idea here is to generate a (k x n) matrix that will hold the theta's
+% for all the labels available
+
+% Here we iterate between all the labels
+for k = 1:num_labels;
+  % Initialize the thetas as a (n + 1 x 1) matrix, it's n + 1 because we want to
+  % include the unit bias, since we append a bunch of one's in the X matrix at
+  % the first column
+  initial_theta = zeros(n + 1, 1);
+  % This auto-function 'fmincg' will calculate the optimal theta values. 
+  % The @(t) means we will pass a parameter to our function lrCostFunction
+  [theta] = fmincg(@(t)(lrCostFunction(t, X, (y == k), lambda)), initial_theta, options);
+  % We got the theta result as a (n + 1 x 1) in order to fit it in our matrix
+  % we will traspose it.
+  all_theta(k,:) = theta';
+endfor;
 
 
 

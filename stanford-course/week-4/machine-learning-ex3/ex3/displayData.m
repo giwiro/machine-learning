@@ -14,6 +14,7 @@ colormap(gray);
 
 % Compute rows, cols
 [m n] = size(X);
+display(n)
 example_height = (n / example_width);
 
 % Compute number of items to display

@@ -18,15 +18,36 @@ p = zeros(size(X, 1), 1);
 % Hint: The max function might come in useful. In particular, the max
 %       function can also return the index of the max element, for more
 %       information see 'help max'. If your examples are in rows, then, you
-%       can use max(A, [], 2) to obtain the max for each row.
 %
+%       can use max(A, [], 2) to obtain the max for each row.
 
+% We add the unit bias to the initial X array
+% X -> m x n
+% Append bunch of ones
+A_1 = [ones(m, 1) X]
+% A -> m x (n + 1)
 
+% We calculate the first Z. To do that we multiply A_1 with Theta1 traspose
+% in order to multiply each theta with it's corresponding x for each 
+% row (training example). Wel will get Z_2.
+% Theta1 -> K x (n + 1)
+Z_2 = A_1 * Theta1';
+% Z_2 -> m x K
+% We add the unit bias to A_2
+A_2 = [ones(m, 1) sigmoid(Z_2)];
+% A_2 -> m x (K + 1)
 
+% Calculate Z_3.
+% Theta2 -> 1 x (K + 1)
+Z_3 = A_2 * Theta2';
+% Z_3 -> m x 1
+% In this last one, we won't append ones because is the final answer
+A_3 = sigmoid(Z_3);
+% A_3 -> m x 1
 
-
-
-
+% We extract the index of the maximum value for each row
+[pv, pi] = max(A_3, [], 2);
+p = pi;
 
 
 % =========================================================================
