@@ -1,0 +1,40 @@
+Why should I learn a new method if I already got \textit{linear regression} and \textit{logistic regression} (for classification). We saw that, in order to fit our model to the data, we can add more variables or increase the order of the polynomial but to achieve that we gotta do a lot of try/error. Wouldn't it be nice to have a method that self-learns the shape of the decision boundary based on all combinations of input data? or do the same for the shape of the polynomial regression ? That's where \textbf{neural networks} are for !!. Generally, we use neural networks to solve classification problems.
+
+\subsection{Representation and Concept}
+
+The representation for neural networks is:
+
+\begin{align}
+	\begin{bmatrix}
+		x_0 \\
+		x_1 \\
+		x_2 \\
+	\end{bmatrix}
+	\rightarrow
+	\begin{bmatrix}
+		a_1^{(2)} \\
+		a_2^{(2)} \\
+	\end{bmatrix}
+	\rightarrow
+	h_{\theta}(x)
+\end{align}
+
+The first vector ($x_j$) is called \textbf{input layer} ($x_i$), it's length will be $n + 1$ ($n$ is the number of features, we add 1 because of the unit bias $x_0$). 
+
+The last item is the \textbf{output layer}($h_{\theta}(x)$) can be a vector too. It represent the final answer, in order word the prediction (whether $0$ or $1$).
+
+The layer(s) between \textit{input} and \textit{output} layers are called \textbf{hidden layer}. Each node in the layer is called \textbf{activation unit} that is a sigmoid function.
+
+The relationship between layers is a matrix of weights ($\Theta^{(j)}$). Since it's a relationship it has to map all the combinations between the layers $j$ and $j + 1$, but we only include the unit bias of the layer j (add one to the number of the layer $j$), the bias unit is always 1 (because it will be directly multiplied by the activation unit). So it will have to be something like this: 
+
+$$\Big[\text{\# of units of layer } (j + 1)\Big] \times \Big[1 + \text{\# of units of layer } (j)\Big]$$
+
+\newpage
+
+\noindent In summary, the representations looks like this:
+
+\begin{align*}
+	& s_j = \text{number of units of layer } j \\
+	& a^{(j)}_i = \text{"activation" of unit } i \text{ in the layer } j \\
+	& \Theta^{(j)} = \text{matrix of weights controlling function mapping from layer } j \text{ to layer } j + 1 \\ 
+\end{align*}
