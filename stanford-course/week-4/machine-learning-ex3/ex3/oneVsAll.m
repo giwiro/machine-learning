@@ -51,7 +51,7 @@ X = [ones(m, 1) X];
 
 options = optimset('GradObj', 'on', 'MaxIter', 50);
 
-% The main idea here is to generate a (k x n) matrix that will hold the theta's
+% The main idea here is to generate a (k x n + 1) matrix that will hold the theta's
 % for all the labels available
 
 % Here we iterate between all the labels
