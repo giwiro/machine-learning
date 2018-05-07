@@ -259,4 +259,4 @@ And the normal equation should look like this (vectorized):
 \subsubsection{Regularized Logistic Regression}
 The form of the regularization for the cost function is: $\frac{\lambda}{2m}\sum^n_{j=1}\theta^2_j$. We \textbf{won't apply regularization on the first parameter (bias)} for this case either. The gradient is the same as the linear.
 
-\noindent When regularization is applied (to solve the overfitting issue), 
+\noindent When regularization is applied (to solve the overfitting issue), we gotta be careful because if we pick a very low regularization parameter ($\lambda$ close to zero), we might still got the overfitting problem. On the other hand, if we pick a really high parameter, then there might be an underfitting problem.
