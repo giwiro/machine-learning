@@ -197,7 +197,7 @@ When we are choosing the \textit{Decision Boundary} or the parameters of the \te
 We observe that even though the fitted curve passes through the data perfectly, we would not expect this to be a good predictor. Now, we got 2 cases: \textbf{underfitting} and \textbf{overfitting}.
 
 \begin{enumerate}[label=\arabic*.]
-	\item \textbf{Underfitting}: Also called \textit{high bias}, is when the form of the hypotheses function ($h_{\theta}$) maps poorly to the trend of the data, it means, the function is too simple to predict an accurate value.
+	\item \textbf{Underfitting}: Also called \textit{high bias}, is when the form of the hypotheses function ($h_{\theta}$) maps poorly to the trend of the data, it means, the function is too simple to predict an accurate value. One reason is because there are very few parameters and cannot generalize very well, thus it cannot make an accurate prediction.
 	\item \textbf{Overfitting}: Also called \textit{high variance}, is when the function fits perfectly the available data but does not generalize very well to predict new data. It is usually caused by a complicated function that creates a lot of unnecessary curves and angles unrelated to the data.
 \end{enumerate}
 
@@ -258,3 +258,5 @@ And the normal equation should look like this (vectorized):
 
 \subsubsection{Regularized Logistic Regression}
 The form of the regularization for the cost function is: $\frac{\lambda}{2m}\sum^n_{j=1}\theta^2_j$. We \textbf{won't apply regularization on the first parameter (bias)} for this case either. The gradient is the same as the linear.
+
+\noindent When regularization is applied (to solve the overfitting issue), 
